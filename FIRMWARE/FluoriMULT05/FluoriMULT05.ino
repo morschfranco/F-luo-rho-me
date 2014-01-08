@@ -30,7 +30,11 @@
   =>Se utilizado RASPBERRY Pi
     Wiring PI
   =>Se utilizado TEENSY
-    Arduino 1.0.3 w/ Teensyduino installed downloaded from http://www.pjrc.com/teensy/td_download.html .
+    Arduino 1.0.3 com Teensyduino http://www.pjrc.com/teensy/td_113/
+ ver 0.7 
+   NOVO MÉTODO DE SELEÇÃO DE PROCESSADOR.
+ 
+ 
  */
 
 // Destaques e lembranças para o USUÁRIO para versão 0.6
@@ -51,11 +55,18 @@
 // Saturação e leitura ~ 500 ns. Processo < 2 us
 
 // 
-
+/* ANTIGO MÉTODO DE SELEÇÃO
 //#define RASPBERRY
-#define TEENSY
+//define TEENSY
 //#define MAPLE
 //#define MEGA2560
+*/
+
+/////// NOVO MÉTODO DE SELEÇÃO DE PROCESSADOR
+//#define RASPBERRY
+//#define ARDUINO
+
+#define TEENSY
 
 #include <SdFat.h>
 #include <SdFatUtil.h>   // funçoes para utilização, formato FAT, Windows e compatíveis
@@ -134,6 +145,24 @@ void setup() {
 
   delay(3000);         // tempo para energização (carregar capacitâncias) e establização do sistema
   Serial.begin(38400); // 384000 é a taxa de transmissão mínima
+
+#ifdef ARDUINO
+  PITimer0.period(duracao_ciclo); // Intervalo (segundos) entre pulsos
+  PITimer1.period(duracao_ciclo); // carrega com mesmo valor de PITimer0
+  PITimer2.period(duracao_experimento);
+
+  // ajusta o relógio do sistema, formato ASCII  "T" + 10 dígitos de informação
+  //setSyncProvider(Teensy3Clock.get);
+#endif
+#ifdef MAPLE
+  Timer0.period(duracao_ciclo); // Intervalo (segundos) entre pulsos
+  Timer1.period(duracao_ciclo); // carrega com mesmo valor de PITimer0
+  Timer2.period(duracao_experimento);
+
+  // ajusta o relógio do sistema, formato ASCII  "T" + 10 dígitos de informação
+  //setSyncProvider(Teensy3Clock.get);
+#endif
+
 #ifdef TEENSY
   // interrupção dos temporizadores utilizados
   PITimer0.period(duracao_ciclo); // Intervalo (segundos) entre pulsos
@@ -143,6 +172,7 @@ void setup() {
   // ajusta o relógio do sistema, formato ASCII  "T" + 10 dígitos de informação
   setSyncProvider(Teensy3Clock.get);
 #endif
+
   while (!Serial);               // aguarda abertura do monitor da porta serial
   if (timeStatus()!= timeSet)
     Serial.println(" Não sincronizado com RTC");
@@ -160,8 +190,8 @@ void setup() {
     // Serial.println(Serial.peek());
     // delay(500);
   }
-//  atime_t t = processSyncMessage();
-  t = processSyncMessage();
+  atime_t t = processSyncMessage();
+  //t = processSyncMessage();
   Serial.print(" 'T' acrescido de 10 digitos ASCII: ");
   Serial.println(t);
   Serial.print(" Buffer Serial disponivel: ");
@@ -178,10 +208,25 @@ void setup() {
   pinMode(Pino_Mede_Lux1, OUTPUT); // configura pino como saída
   pinMode(Pino_Sat_Lux1, OUTPUT); // configura pino como saída
   pinMode(Pino_Cal_Lux1, OUTPUT); // configura pino como saída
+#ifdef TEENSY  
   analogReadAveraging(1); // Média ADC = 1(apenas uma medição, demora ~3 us)
   pinMode(detector1, EXTERNAL);
   analogReadRes(Resolucao_AD);
   Valor_Resolucao_AD = pow(2, Resolucao_AD); // determina o valor máximo lido a partir da resolução
+#endif
+#ifdef ARDUINO  
+//  analogReadAveraging(1); // Média ADC = 1(apenas uma medição, demora ~3 us)
+  pinMode(detector1, INPUT);
+//  analogReadRes(Resolucao_AD);
+  Valor_Resolucao_AD = 1023; // determina o valor máximo lido a partir da resolução
+#endif
+#ifdef MAPLE  
+//  analogReadAveraging(1); // Média ADC = 1(apenas uma medição, demora ~3 us)
+  pinMode(detector1, INPUT);
+//  analogReadRes(Resolucao_AD);
+  Valor_Resolucao_AD = 4095; // determina o valor máximo lido a partir da resolução
+#endif
+
 
   if (!sd.begin(SD_CHIP_SELECT, SPI_FULL_SPEED)) sd.initErrorHalt(); // Taxa máxima de E/S para o SD.
 
@@ -331,13 +376,37 @@ void CalibraRebel() {
   inicia1orig = micros();
   inicia1 = micros();
   for (i=0; i < Cal_Ciclos_Pulso; i++) {
+  #ifdef ARDUINO
+    digitalWrite(Pino_Mede_Lux1, HIGH);
+  #endif
+  #ifdef MAPLE
+    digitalWrite(Pino_Mede_Lux1, HIGH);
+  #endif
+  #ifdef TEENSY
     digitalWriteFast(Pino_Mede_Lux1, HIGH);
+  #endif  
+  #ifdef RASPBERRY
+    digitalWrite(Pino_Mede_Lux1, HIGH);
+  #endif
+
     Dados1 = analogRead(detector1);
     inicia1 = inicia1 + Cal_T_Alto_Pulso;
     while (micros() < inicia1) {
     }
     inicia1 = inicia1 + Cal_T_Baixo_Pulso;
+  #ifdef ARDUINO
+    digitalWrite(Pino_Mede_Lux1, LOW);
+  #endif
+  #ifdef MAPLE
+    digitalWrite(Pino_Mede_Lux1, LOW);
+  #endif
+  #ifdef TEENSY
     digitalWriteFast(Pino_Mede_Lux1, LOW);
+  #endif  
+  #ifdef RASPBERRY
+    digitalWrite(Pino_Mede_Lux1, LOW);
+  #endif
+//    digitalWriteFast(Pino_Mede_Lux1, LOW);
     Amostra_Dado_Rebel[i] = Dados1;
     while (micros() < inicia1) {
     }

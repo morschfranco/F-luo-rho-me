@@ -1,4 +1,4 @@
-
+//UTILIZAR DETECT05.SCH
 //bibiotecas:
 #include <Keypad.h>        // http://playground.arduino.cc/Code/Keypad
 #include <LiquidCrystal.h> // http://playground.arduino.cc/Code/LCD 

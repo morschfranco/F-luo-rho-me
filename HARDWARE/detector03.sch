@@ -14543,13 +14543,29 @@ include  Type MT6; con-amp-mt6.lbr&lt;p&gt;
 <part name="D3" library="opto-trans-siemens" deviceset="SFH225" device="" value=""/>
 <part name="SV1" library="con-amp-mt" deviceset="L03P" device=""/>
 <part name="SV2" library="con-amp-mt" deviceset="L02P" device=""/>
+<part name="D4" library="diode" deviceset="1N4148" device="DO35-7"/>
+<part name="D5" library="diode" deviceset="1N4148" device="DO35-7"/>
+<part name="GND10" library="supply1" deviceset="GND" device=""/>
+<part name="D6" library="diode" deviceset="1N4148" device="DO35-7"/>
+<part name="D7" library="diode" deviceset="1N4148" device="DO35-7"/>
+<part name="GND11" library="supply1" deviceset="GND" device=""/>
+<part name="D8" library="diode" deviceset="1N4148" device="DO35-7"/>
+<part name="D9" library="diode" deviceset="1N4148" device="DO35-7"/>
+<part name="GND12" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
 <plain>
-<text x="220.98" y="68.58" size="1.778" layer="91">A/D Arduino</text>
 <text x="48.26" y="15.24" size="1.778" layer="91">( +12&lt;+V&lt;+15 ) Volts CC</text>
 <text x="50.8" y="-22.86" size="1.778" layer="91">( -15&lt;-V&lt;-12 ) Volts CC</text>
+<text x="187.96" y="17.78" size="1.778" layer="91">3V3</text>
+<text x="228.6" y="17.78" size="1.778" layer="91">5v</text>
+<text x="205.74" y="17.78" size="1.778" layer="91">1V2</text>
+<text x="233.68" y="0" size="1.778" layer="91">A/D Arduino</text>
+<text x="228.6" y="68.58" size="1.778" layer="91">SAÍDA</text>
+<text x="180.34" y="0" size="1.778" layer="91">SAÍDA</text>
+<text x="175.26" y="33.02" size="1.778" layer="91">Proteção SOBRETENSÃO ADC - Adequar nível lógico do PROCESSADOR</text>
+<text x="66.04" y="93.98" size="1.778" layer="91">VERIFIQUE SEMPRE O NÍVEL DE SAÍDA DO SINAL ANTES DE CONECTAR AO PROCESSADOR</text>
 </plain>
 <instances>
 <instance part="IC1" gate="A" x="5.08" y="68.58" rot="MR180"/>
@@ -14608,6 +14624,15 @@ include  Type MT6; con-amp-mt6.lbr&lt;p&gt;
 <instance part="SV1" gate="-3" x="71.12" y="-7.62"/>
 <instance part="SV2" gate="-1" x="210.82" y="63.5" rot="R180"/>
 <instance part="SV2" gate="-2" x="210.82" y="68.58" rot="R180"/>
+<instance part="D4" gate="G$1" x="190.5" y="7.62" rot="R90"/>
+<instance part="D5" gate="G$1" x="190.5" y="-10.16" rot="R90"/>
+<instance part="GND10" gate="1" x="190.5" y="-17.78"/>
+<instance part="D6" gate="G$1" x="208.28" y="7.62" rot="R90"/>
+<instance part="D7" gate="G$1" x="208.28" y="-10.16" rot="R90"/>
+<instance part="GND11" gate="1" x="208.28" y="-17.78"/>
+<instance part="D8" gate="G$1" x="228.6" y="7.62" rot="R90"/>
+<instance part="D9" gate="G$1" x="228.6" y="-10.16" rot="R90"/>
+<instance part="GND12" gate="1" x="228.6" y="-17.78"/>
 </instances>
 <busses>
 </busses>
@@ -14849,6 +14874,21 @@ include  Type MT6; con-amp-mt6.lbr&lt;p&gt;
 <wire x1="205.74" y1="63.5" x2="200.66" y2="63.5" width="0.1524" layer="91"/>
 <wire x1="200.66" y1="63.5" x2="200.66" y2="48.26" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="D5" gate="G$1" pin="A"/>
+<pinref part="GND10" gate="1" pin="GND"/>
+<wire x1="190.5" y1="-12.7" x2="190.5" y2="-15.24" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="D7" gate="G$1" pin="A"/>
+<pinref part="GND11" gate="1" pin="GND"/>
+<wire x1="208.28" y1="-12.7" x2="208.28" y2="-15.24" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="D9" gate="G$1" pin="A"/>
+<pinref part="GND12" gate="1" pin="GND"/>
+<wire x1="228.6" y1="-12.7" x2="228.6" y2="-15.24" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="N$17" class="0">
 <segment>
@@ -14958,6 +14998,54 @@ include  Type MT6; con-amp-mt6.lbr&lt;p&gt;
 <pinref part="SV1" gate="-3" pin="S"/>
 <wire x1="76.2" y1="-7.62" x2="76.2" y2="-20.32" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="-20.32" x2="83.82" y2="-20.32" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$12" class="0">
+<segment>
+<pinref part="D4" gate="G$1" pin="C"/>
+<wire x1="190.5" y1="10.16" x2="190.5" y2="15.24" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$15" class="0">
+<segment>
+<pinref part="D4" gate="G$1" pin="A"/>
+<pinref part="D5" gate="G$1" pin="C"/>
+<wire x1="190.5" y1="5.08" x2="190.5" y2="0" width="0.1524" layer="91"/>
+<wire x1="190.5" y1="0" x2="190.5" y2="-7.62" width="0.1524" layer="91"/>
+<wire x1="190.5" y1="0" x2="187.96" y2="0" width="0.1524" layer="91"/>
+<wire x1="190.5" y1="0" x2="193.04" y2="0" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$16" class="0">
+<segment>
+<pinref part="D6" gate="G$1" pin="C"/>
+<wire x1="208.28" y1="10.16" x2="208.28" y2="15.24" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$19" class="0">
+<segment>
+<pinref part="D6" gate="G$1" pin="A"/>
+<pinref part="D7" gate="G$1" pin="C"/>
+<wire x1="208.28" y1="5.08" x2="208.28" y2="0" width="0.1524" layer="91"/>
+<wire x1="208.28" y1="0" x2="208.28" y2="-7.62" width="0.1524" layer="91"/>
+<wire x1="208.28" y1="0" x2="205.74" y2="0" width="0.1524" layer="91"/>
+<wire x1="208.28" y1="0" x2="210.82" y2="0" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$20" class="0">
+<segment>
+<pinref part="D8" gate="G$1" pin="C"/>
+<wire x1="228.6" y1="10.16" x2="228.6" y2="15.24" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$21" class="0">
+<segment>
+<pinref part="D8" gate="G$1" pin="A"/>
+<pinref part="D9" gate="G$1" pin="C"/>
+<wire x1="228.6" y1="5.08" x2="228.6" y2="0" width="0.1524" layer="91"/>
+<wire x1="228.6" y1="0" x2="228.6" y2="-7.62" width="0.1524" layer="91"/>
+<wire x1="228.6" y1="0" x2="226.06" y2="0" width="0.1524" layer="91"/>
+<wire x1="228.6" y1="0" x2="231.14" y2="0" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

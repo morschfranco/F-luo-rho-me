@@ -5058,6 +5058,39 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="supply1">
+<description>&lt;b&gt;Supply Symbols&lt;/b&gt;&lt;p&gt;
+ GND, VCC, 0V, +5V, -5V, etc.&lt;p&gt;
+ Please keep in mind, that these devices are necessary for the
+ automatic wiring of the supply signals.&lt;p&gt;
+ The pin name defined in the symbol is identical to the net which is to be wired automatically.&lt;p&gt;
+ In this library the device names are the same as the pin names of the symbols, therefore the correct signal names appear next to the supply symbols in the schematic.&lt;p&gt;
+ &lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+</packages>
+<symbols>
+<symbol name="GND">
+<wire x1="-1.905" y1="0" x2="1.905" y2="0" width="0.254" layer="94"/>
+<text x="-2.54" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="GND" x="0" y="2.54" visible="off" length="short" direction="sup" rot="R270"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="GND" prefix="GND">
+<description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
+<gates>
+<gate name="1" symbol="GND" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -5069,11 +5102,14 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </classes>
 <parts>
 <part name="SV1" library="con-amp-mt" deviceset="L04P" device=""/>
-<part name="SV2" library="con-amp-mt" deviceset="L04P" device=""/>
 <part name="LED1" library="led" deviceset="LED" device="5MM"/>
 <part name="LED2" library="led" deviceset="LED" device="5MM"/>
 <part name="R1" library="rcl" deviceset="R-EU_" device="0204/7" value="220 R"/>
 <part name="R2" library="rcl" deviceset="R-EU_" device="0204/7" value="220 R"/>
+<part name="SV3" library="con-amp-mt" deviceset="L04P" device=""/>
+<part name="R5" library="rcl" deviceset="R-EU_" device="0204/7" value="1 k"/>
+<part name="R6" library="rcl" deviceset="R-EU_" device="0204/7" value="1k3"/>
+<part name="GND5" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -5082,27 +5118,39 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <text x="15.24" y="71.12" size="1.778" layer="91">ARDUINO 6</text>
 <text x="15.24" y="66.04" size="1.778" layer="91">ARDUINO 8</text>
 <text x="15.24" y="60.96" size="1.778" layer="91">ARDUINO 9</text>
-<text x="12.7" y="35.56" size="1.778" layer="91">ARDUINO 3V3</text>
-<text x="12.7" y="30.48" size="1.778" layer="91">ARDUINO GND</text>
-<text x="15.24" y="25.4" size="1.778" layer="91">ARDUINO 5</text>
-<text x="15.24" y="20.32" size="1.778" layer="91">ARDUINO 4</text>
-<text x="-25.4" y="25.4" size="1.778" layer="91">OPCIONAL: BLUETOOTH HC-05</text>
 <text x="-20.32" y="73.66" size="1.778" layer="91">LED SENSOR 570-580 nm</text>
 <text x="-20.32" y="63.5" size="1.778" layer="91">LED EMISSOR 430-450 nm</text>
+<text x="12.7" y="43.18" size="1.778" layer="91">ARDUINO 3V3</text>
+<text x="12.7" y="38.1" size="1.778" layer="91">ARDUINO GND</text>
+<text x="15.24" y="33.02" size="1.778" layer="91">ARDUINO 5</text>
+<text x="15.24" y="27.94" size="1.778" layer="91">ARDUINO 4</text>
+<text x="-25.4" y="33.02" size="1.778" layer="91">OPCIONAL: BLUETOOTH HC-05</text>
+<text x="48.26" y="43.18" size="1.778" layer="91">Bluotooth 12</text>
+<text x="48.26" y="38.1" size="1.778" layer="91">Bluotooth 13</text>
+<text x="48.26" y="33.02" size="1.778" layer="91">Bluotooth TX (1)</text>
+<text x="48.26" y="27.94" size="1.778" layer="91">Bluotooth RX (2)</text>
+<text x="2.54" y="48.26" size="1.778" layer="91">Se processador possuir nível lógico de 5V usar divisor resistivo ou conversor de nível</text>
+<text x="38.1" y="10.16" size="1.778" layer="91">ARDUINO 5 V</text>
+<text x="25.4" y="-2.54" size="1.778" layer="91">ARDUINO 4</text>
+<text x="45.72" y="-2.54" size="1.778" layer="91">Bluotooth RX (2)</text>
+<text x="27.94" y="15.24" size="1.778" layer="91">Divisor resistivo (ARDUINO 5 V)</text>
 </plain>
 <instances>
 <instance part="SV1" gate="-1" x="38.1" y="76.2"/>
 <instance part="SV1" gate="-2" x="38.1" y="71.12"/>
 <instance part="SV1" gate="-3" x="38.1" y="66.04"/>
 <instance part="SV1" gate="-4" x="38.1" y="60.96"/>
-<instance part="SV2" gate="-1" x="38.1" y="35.56"/>
-<instance part="SV2" gate="-2" x="38.1" y="30.48"/>
-<instance part="SV2" gate="-3" x="38.1" y="25.4"/>
-<instance part="SV2" gate="-4" x="38.1" y="20.32"/>
 <instance part="LED1" gate="G$1" x="68.58" y="76.2" rot="R90"/>
 <instance part="LED2" gate="G$1" x="68.58" y="66.04" rot="R90"/>
 <instance part="R1" gate="G$1" x="55.88" y="76.2"/>
 <instance part="R2" gate="G$1" x="55.88" y="66.04"/>
+<instance part="SV3" gate="-1" x="38.1" y="43.18"/>
+<instance part="SV3" gate="-2" x="38.1" y="38.1"/>
+<instance part="SV3" gate="-3" x="38.1" y="33.02"/>
+<instance part="SV3" gate="-4" x="38.1" y="27.94"/>
+<instance part="R5" gate="G$1" x="43.18" y="2.54" rot="R270"/>
+<instance part="R6" gate="G$1" x="43.18" y="-12.7" rot="R270"/>
+<instance part="GND5" gate="1" x="43.18" y="-22.86"/>
 </instances>
 <busses>
 </busses>
@@ -5151,6 +5199,25 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <wire x1="81.28" y1="66.04" x2="81.28" y2="60.96" width="0.1524" layer="91"/>
 <pinref part="SV1" gate="-4" pin="S"/>
 <wire x1="81.28" y1="60.96" x2="43.18" y2="60.96" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="GND" class="0">
+<segment>
+<pinref part="GND5" gate="1" pin="GND"/>
+<pinref part="R6" gate="G$1" pin="2"/>
+<wire x1="43.18" y1="-20.32" x2="43.18" y2="-17.78" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$7" class="0">
+<segment>
+<pinref part="R5" gate="G$1" pin="2"/>
+<pinref part="R6" gate="G$1" pin="1"/>
+<wire x1="43.18" y1="-2.54" x2="43.18" y2="-5.08" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="-5.08" x2="43.18" y2="-7.62" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="-5.08" x2="22.86" y2="-5.08" width="0.1524" layer="91"/>
+<junction x="43.18" y="-5.08"/>
+<wire x1="43.18" y1="-5.08" x2="60.96" y2="-5.08" width="0.1524" layer="91"/>
+<wire x1="60.96" y1="-5.08" x2="60.96" y2="-7.62" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
