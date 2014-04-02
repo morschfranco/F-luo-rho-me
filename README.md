@@ -1,10 +1,27 @@
-F-luo-rho-me BSD LICENSE
 ==============================================================================
-Copyright (c) 2013, ANDREI LEANDRO MORSCH FRANCO, UPControl
+
+                                        F-luo-rho-me
+
+==============================================================================
+Analisador por Fluorometria destinado a análise de:
+* Doenças em plantas;
+* Clorofila A e B;
+* Algas, coliformes, bactérias e micro-organismos;
+* Outros usos sugeridos pela criatividade humana.
+
+Esta é uma versão menos elaborada de equipamento destinado à medição do teor
+de Enxofre (S) em correntes de Diesel.
+
+==============================================================================
+BSD LICENSE
+------------------------------------------------------------------------------
+
+Copyright (c) 2013, ANDREI LEANDRO MORSCH FRANCO,
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
+
 1. Redistributions of source code must retain the above copyright
    notice, this list of conditions and the following disclaimer.
 2. Redistributions in binary form must reproduce the above copyright
@@ -16,6 +33,7 @@ modification, are permitted provided that the following conditions are met:
 4. Neither the name of Andrei Leandro Morsch Franco nor the
    names of its contributors may be used to endorse or promote products
    derived from this software without specific prior written permission.
+
 
 THIS SOFTWARE IS PROVIDED BY Andrei Leandro Morsch Franco ''AS IS'' AND ANY
 EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
